@@ -4,7 +4,8 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -r ./server.js"
+    "dev": "nodemon -r ./server.js",
+    "heroku-postbuild": "cd frontend && yarn && yarn run build"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
