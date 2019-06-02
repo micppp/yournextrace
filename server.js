@@ -2,10 +2,12 @@ const cors = require('cors');
 const cheerio = require('cheerio');
 const express = require('express');
 const fetch = require('node-fetch');
+const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3333;
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 const fetchUrl = 'https://www.northeastraces.com/';
 
@@ -99,11 +101,15 @@ const getData = async (url) => {
   return data;
 };
 
-app.get('/data', async (req, res) => {
+app.get('/api', async (req, res) => {
   const response = await getData(fetchUrl);
   const data = await response;
 
   res.json(data);
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(`${__dirname}/client/build/index.html`));
 });
 
 app.listen(port);
