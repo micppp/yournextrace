@@ -18,9 +18,19 @@ class App extends Component {
 
     return (
       <div className="app">
-        {races.map(race => (
-          <div>{race.title}</div>
-        ))}
+        {races.map(
+          ({ title, location, postcode, date, time, raceUrl, distance }) => (
+            <div>
+              <h3>{title}</h3>
+              <p>{location}</p>
+              <p>{postcode}</p>
+              <p>{date}</p>
+              <p>{time}</p>
+              <p>{raceUrl}</p>
+              <p>{distance}</p>
+            </div>
+          )
+        )}
       </div>
     );
   }
