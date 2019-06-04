@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loader = () => {
+export default function Loader() {
   return (
     <div className="lds-ring">
       <div />
@@ -9,6 +9,4 @@ const Loader = () => {
       <div />
     </div>
   );
-};
-
-export default Loader;
+}

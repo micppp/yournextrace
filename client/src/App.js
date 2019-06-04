@@ -1,32 +1,28 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "./components/Loader";
 import Races from "./components/Races";
 
-class App extends Component {
-  state = {
-    loading: true,
-    races: []
-  };
+function App() {
+  const [loading, setLoading] = useState(true);
+  const [races, setRaces] = useState([]);
 
-  componentWillMount = async () => {
-    const res = await fetch("/api");
-    const races = await res.json();
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("/api");
+      const races = await res.json();
 
-    this.setState({
-      loading: false,
-      races
-    });
-  };
+      setLoading(false);
+      setRaces(races);
+    }
 
-  render() {
-    const { loading, races } = this.state;
+    fetchData();
+  }, []);
 
-    return (
-      <div className={loading ? "app app--loading" : "app"}>
-        {loading ? <Loader /> : <Races races={races} />}
-      </div>
-    );
-  }
+  return (
+    <div className={loading ? "app app--loading" : "app"}>
+      {loading ? <Loader /> : <Races races={races} />}
+    </div>
+  );
 }
 
 export default App;
